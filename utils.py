@@ -2,6 +2,10 @@ import json
 
 
 def read_file():
+    """
+    Читает файл json и преобразует в список
+    :return: Список транзакций
+    """
     with open('operations.json', 'r', encoding='UTF-8') as f:
         transactions_list = json.load(f)
     return transactions_list
