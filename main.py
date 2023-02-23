@@ -1,6 +1,6 @@
 from utils import read_file, execute_transactios, hide_symbols_account, transfom_date_fomat
 
-transaction_list = read_file()
+transaction_list = read_file('operations.json')
 filtered_sorted_list = execute_transactios(transaction_list, 'date', 'EXECUTED')[:5]
 
 
