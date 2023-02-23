@@ -16,5 +16,3 @@ for i in filtered_sorted_list:
         print(hide_symbols_account(i['to']))
         print(i['operationAmount']['amount'], i['operationAmount']['currency']['name'])
         print('')
-
-

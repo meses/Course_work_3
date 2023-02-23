@@ -1,4 +1,6 @@
 import json
+
+
 def read_file():
     with open('operations.json', 'r', encoding='UTF-8') as f:
         transactions_list = json.load(f)
@@ -21,7 +23,7 @@ def execute_transactios(transaction_list, sort_key, filter_key):
     return execute_list
 
 
-def hide_symbols_account(bank_account:str):
+def hide_symbols_account(bank_account: str):
     """
     Маскирует номер счёта или карты
     :param bank_account: Тип и номер
@@ -30,7 +32,7 @@ def hide_symbols_account(bank_account:str):
     if bank_account.split(' ')[0] == 'Счет':
         account_number = bank_account.split(' ')[1]
         account_name = bank_account.split(' ')[0]
-        hyde_account_number = "**"+account_number[-4:len(account_number)]
+        hyde_account_number = "**" + account_number[-4:len(account_number)]
         hyde_bank_account_list = []
         hyde_bank_account_list.append(account_name)
         hyde_bank_account_list.append(hyde_account_number)
@@ -46,7 +48,8 @@ def hide_symbols_account(bank_account:str):
         hyde_bank_account = ' '.join(hyde_bank_account_list)
     return hyde_bank_account
 
-def transfom_date_fomat(original_date:str):
+
+def transfom_date_fomat(original_date: str):
     """
     Преобразует формат даты с ГГГ-ММ-ДД в ДД.ММ.ГГГГ
     :param original_date: Строка в формате ГГГ-ММ-ДД
