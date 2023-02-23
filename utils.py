@@ -4,26 +4,13 @@ def read_file():
         transactions_list = json.load(f)
     return transactions_list
 
-#print(read_file()[0])
-elem = read_file()
-
-    #element = read_file()[0]
-    #print(i.get('state'))
-print(f'Всего элементов {len(elem)}')
-
-transaction_list = read_file()
-def sort_by_id(transaction_list:list):
-    transaction_list_sorted = []
-    transaction_list_sorted = transaction_list.sort(key=lambda d: d['date'], reverse=True)
-    return transaction_list
-
-#print(sort_by_id(read_file()))
 
 def execute_transactios(transaction_list, sort_key, filter_key):
     """
     Сортирует и фильтрует список
     :param transaction_list: Исходный список
-    :param sort_key: Ключ по которому сортирвоать
+    :param sort_key: Ключ по которому сортирвоать список
+    :param filter_key: Ключ по которому фильтровать список
     :return: Фильтрованный и сортированный список
     """
     execute_list = []
@@ -33,17 +20,40 @@ def execute_transactios(transaction_list, sort_key, filter_key):
     execute_list.sort(key=lambda dictionary: dictionary[sort_key], reverse=True)
     return execute_list
 
-#print(f'Элементов EXECUTED {len(execute_transactios(transaction_list))}')
-for i in execute_transactios(transaction_list, 'date', 'EXECUTED'):
-    print(i)
 
-'''
-def get_key(transaction_list):
-    return transaction_list['date']
+def hide_symbols_account(bank_account:str):
+    """
+    Маскирует номер счёта или карты
+    :param bank_account: Тип и номер
+    :return: Маскированный тип и номер
+    """
+    if bank_account.split(' ')[0] == 'Счет':
+        account_number = bank_account.split(' ')[1]
+        account_name = bank_account.split(' ')[0]
+        hyde_account_number = "**"+account_number[-4:len(account_number)]
+        hyde_bank_account_list = []
+        hyde_bank_account_list.append(account_name)
+        hyde_bank_account_list.append(hyde_account_number)
+        hyde_bank_account = ' '.join(hyde_bank_account_list)
+    else:
+        account_number = bank_account.split(' ')[-1]
+        account_name = bank_account.split(' ')[:-1]
+        account_number_hyde = account_number[:6] + "******" + account_number[12:16]
+        account_number_hyde_sep = ' '.join([account_number_hyde[i:i+4] for i in range(0, len(account_number_hyde), 4)])
+        hyde_bank_account_list = []
+        hyde_bank_account_list.append(' '.join(account_name))
+        hyde_bank_account_list.append(account_number_hyde_sep)
+        hyde_bank_account = ' '.join(hyde_bank_account_list)
+    return hyde_bank_account
 
-#filtered_list.sort(key=get_key(filtered_list))
-#print(filtered_list)
-filtered_list.sort(key=lambda dictionary: dictionary['date'], reverse=True)
-for i in filtered_list:
-    print(i)
-'''
+def transfom_date_fomat(original_date:str):
+    """
+    Преобразует формат даты с ГГГ-ММ-ДД в ДД.ММ.ГГГГ
+    :param original_date: Строка в формате ГГГ-ММ-ДД
+    :return: Строка в формате ДД.ММ.ГГГГ
+    """
+    date_str = original_date.split('T')[0]
+    date_list = date_str.split('-')
+    date_list.reverse()
+    transformed_date = '.'.join(date_list)
+    return transformed_date
