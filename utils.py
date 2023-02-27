@@ -55,8 +55,8 @@ def hide_symbols_account(bank_account: str):
 
 def transfom_date_fomat(original_date: str):
     """
-    Преобразует формат даты с ГГГ-ММ-ДД в ДД.ММ.ГГГГ
-    :param original_date: Строка в формате ГГГ-ММ-ДД
+    Преобразует формат даты с ГГГ-ММ-ДДTчч:мм:сс.мс в ДД.ММ.ГГГГ
+    :param original_date: Строка в формате ГГГ-ММ-ДДTчч:мм:сс.мс
     :return: Строка в формате ДД.ММ.ГГГГ
     """
     date_str = original_date.split('T')[0]
